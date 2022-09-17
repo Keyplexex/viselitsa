@@ -48,21 +48,22 @@ def display_word(guessed_letters_indexes: List[int], word: str):
         Формирует строку вида Я_ло_о (неугаданные буквы заменить _)
         и отображает в стандартном потоке вывода (print())
     """
-    displayword = word.split()
+    displayword = list(word)
     for i in range(len(word)):
         if i not in guessed_letters_indexes:
             displayword[i] = "_"
-    print(displayword)
+    print(*displayword, sep='')
 
 
 def check_end_game(guessed_letters_indexes: List[int], word: str) -> bool:
     """
         Проверяет окончена ли игра: если guessed_letter_indexes формируют в итоге слово word, то игра заканчивается
     """
+    end_game = True
     for i in range(len(word)):
         if i not in guessed_letters_indexes:
-            return False
-        return True
+            end_game = False
+    return end_game
 
 
 def main():
@@ -75,9 +76,9 @@ def main():
     4) Проверить - окончена ли игра (check_end_gamy)
     5) Если игра не окончена - выполнять сначала
     """
-    while check_end_game(guessed_letters_indexes, word):
+    while not check_end_game(guessed_letters_indexes, word):
         letter = get_input_letter()
-        check_letter(letter, word)
+        guessed_letters_indexes.extend(check_letter(letter, word))
         display_word(guessed_letters_indexes, word)
     print("You`re right")
 
