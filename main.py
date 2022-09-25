@@ -29,13 +29,6 @@ def check_letter(letter: str, word: str) -> List[int]:
         если есть - возвращяет список индексов, если нет - возвращяет пустой список
     """
     indexes = []
-    # if word.count(letter) == 1:
-    #     return [word.index(letter)]
-    # elif word.count(letter) > 1:
-    #     for i in range(word.count(letter)):
-    #         index = word[i::].index(letter)
-    #         indexes.append(index)
-    #         return indexes
     for index, iter_letter in enumerate(word):
         if iter_letter == letter:
             indexes.append(index)
